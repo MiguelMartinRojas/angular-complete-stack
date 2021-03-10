@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,32 +20,35 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListPostsComponent } from './list-posts/list-posts.component';
 import { NewPostsComponent } from './new-posts/new-posts.component';
 import { PostsState } from './store/posts/posts.state';
+import { CardProductComponent } from './card-product/card-product.component';
+import { StoreItemComponent } from './store-item/store-item.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductsState } from './store/product/product.state';
 
-
-
-
-
-  var MaterialModules = [
-    MatFormFieldModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatProgressSpinnerModule
-  ]
+var MaterialModules = [
+  MatFormFieldModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatProgressSpinnerModule
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     ListPostsComponent,
-    NewPostsComponent
+    NewPostsComponent,
+    CardProductComponent,
+    StoreItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     NgxsModule.forRoot([],
       { developmentMode: !environment.production }
     ),
@@ -56,12 +59,13 @@ import { PostsState } from './store/posts/posts.state';
       disabled: environment.production
     }),
     NgxsModule.forRoot([
-      PostsState
+      PostsState,
+      ProductsState
     ]),
     MaterialModules,
     FormsModule,
     ReactiveFormsModule
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

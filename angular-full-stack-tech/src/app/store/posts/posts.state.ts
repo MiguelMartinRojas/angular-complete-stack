@@ -18,7 +18,6 @@ export class PostsState {
         });
     }
 
-
     @Action(RemovePost)
     remove({ getState, patchState }: StateContext<PostsStateModel>, { payload }: RemovePost) {
         patchState({

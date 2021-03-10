@@ -1,5 +1,5 @@
 export class PostsStateModel {
-    posts: Posts[] = [];
+    posts: Posts[];
 }
 
 export interface Posts {

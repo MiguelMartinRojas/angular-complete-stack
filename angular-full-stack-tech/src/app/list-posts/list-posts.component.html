@@ -4,7 +4,7 @@
             <div class="card-content">
                 <p class="id"><small>ID: {{ post.id }}</small></p>
                 <p>{{ post.text }}</p>
-                <a class="button is-danger is-small" (click)="removePost(post.id)">Eliminar</a>
+                <button mat-raised-button color="accent" (click)="removePost(post.id)">Delete</button>
             </div>
         </div>
     </li>

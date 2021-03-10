@@ -1,15 +1,10 @@
 <div class="container">
-  <div class="columns">
-    <div class="column">
-      <h1>Angular Chile MessageBoard</h1>
-    </div>
-  </div>
-  <div class="columns">
-    <div class="column">
-      <app-new-posts></app-new-posts>
-    </div>
-    <div class="column">
-      <app-list-posts></app-list-posts>
-    </div>
-  </div>
+  <mat-toolbar color="primary">
+    <h1>
+      My Angular Store
+    </h1>
+    <button mat-button routerLink="/">Store item</button>
+    <button mat-button routerLink="/product">Product</button>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
 </div>
