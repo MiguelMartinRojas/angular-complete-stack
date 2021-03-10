@@ -1,0 +1,7 @@
+
+<mat-form-field appearance="fill">
+    <mat-label>Enter a new post text</mat-label>
+    <input matInput placeholder="Some post" [(ngModel)]="text" [formControl]="requiredFormControl" required>
+    <mat-error *ngIf="requiredFormControl.invalid">{{getErrorMessage()}}</mat-error>
+</mat-form-field>
+<button mat-raised-button color="accent" (click)="addPost()">Submit</button>
