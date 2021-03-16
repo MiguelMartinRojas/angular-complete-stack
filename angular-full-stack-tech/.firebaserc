@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-products-8c9d5": {
+      "hosting": {
+        "angular-full-stack-tech": [
+          "angular-products-8c9d5"
+        ]
+      }
+    }
+  }
+}
