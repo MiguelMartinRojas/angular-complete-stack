@@ -1,4 +1,4 @@
-import { Product } from './product.model';
+import { Pagination, Product } from './product.model';
 
 export class AddProduct {
     static readonly type = '[PRODUCT] Add';
@@ -12,4 +12,9 @@ export class RemoveProduct {
 export class LoadProducts {
     static readonly type = '[PRODUCT] Load';
     constructor() { }
+}
+
+export class LoadProductsByPage {
+    static readonly type = '[PRODUCT] Load by page';
+    constructor(public pagination: string) { }
 }

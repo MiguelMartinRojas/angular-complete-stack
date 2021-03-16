@@ -1,8 +1,10 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { ProductStateModel } from './product.model';
-import { AddProduct, LoadProducts, RemoveProduct } from './product.actions';
+import { AddProduct, LoadProducts, LoadProductsByPage, RemoveProduct } from './product.actions';
 import { ApiService } from "src/services/api.service";
 import { Injectable } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { take, tap } from 'rxjs/operators';
 
 @State({
     name: 'products',
@@ -31,18 +33,28 @@ export class ProductsState {
         });
     }
 
-
     @Action(LoadProducts)
     load({ getState, patchState }: StateContext<ProductStateModel>, { }: LoadProducts) {
         const state = getState();
-
-        this.apiService.getProducts().subscribe((data: any[]) => {
-            console.log(data);
-            patchState({
-                products: data
-            });
-        })
-
+        return this.apiService.getProducts().pipe(
+            take(1),
+            tap((res: HttpResponse<any[]>) => {
+                console.log(res);
+                patchState({
+                    products: res.body
+                });
+            })
+        )
     }
 
+    @Action(LoadProductsByPage)
+    loadProductsByPage({ getState, patchState }: StateContext<ProductStateModel>, { pagination }: LoadProductsByPage) {
+        const state = getState();
+        return this.apiService.sendGetRequestToUrl(pagination).subscribe((res: HttpResponse<any>) => {
+            console.log(res);
+            patchState({
+                products: res.body
+            });
+        })
+    }
 }

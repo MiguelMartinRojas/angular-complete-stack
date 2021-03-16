@@ -9,3 +9,10 @@ export interface Product {
     description: string;
     imageUrl: string;
 }
+
+export class Pagination {
+    first: string;
+    last: string;
+    prev: string;
+    next: string;
+}

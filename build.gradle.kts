@@ -10,6 +10,9 @@ plugins {
 group = "com.angular"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
+val webAppDir = "$projectDir/angular-full-stack-tech"
+val distFolder = "$webAppDir/dist/angular-full-stack-tech"
+val destFolder = "$projectDir/src/main/resources/static"
 
 repositories {
 	mavenCentral()
@@ -23,6 +26,11 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
+tasks.getByName("processResources"){
+	dependsOn("buildAngular")
+	dependsOn("copyAngularClient")
+}
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -32,4 +40,28 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.register<Exec>("buildAngular") {
+	dependsOn("installAngular")
+	workingDir(webAppDir)
+	inputs.dir(webAppDir)
+	// Add task to the standard build group
+	group = BasePlugin.BUILD_GROUP
+	commandLine("ng", "build")
+
+}
+
+tasks.register<Exec>("installAngular") {
+	workingDir (webAppDir)
+	inputs.dir(webAppDir)
+	// Add task to the standard build group
+	group = BasePlugin.BUILD_GROUP
+	commandLine("npm", "install")
+}
+
+tasks.register<Copy>("copyAngularClient") {
+	println("Copying files from $distFolder to $destFolder")
+	from (distFolder)
+	into (destFolder)
 }
