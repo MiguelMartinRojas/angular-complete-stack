@@ -2,7 +2,7 @@
     <li  *ngFor="let post of posts$ | async">
         <div class="card">
             <div class="card-content">
-                <p class="id"><small>ID: {{ post.id }}</small></p>
+                <h2 class="id"><small>ID: {{ post.id }}</small></h2>
                 <p>{{ post.text }}</p>
                 <button mat-raised-button color="accent" (click)="removePost(post.id)">Delete</button>
             </div>

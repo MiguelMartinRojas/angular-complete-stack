@@ -10,7 +10,22 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('angular-full-stack-tech app is running!');
+    expect(await page.getTitleText()).toEqual('My Angular Store');
+  });
+
+  it('should create a new product', async () => {
+
+    await page.navigateTo();
+
+    await (await page.getProductInput()).sendKeys('Add a new product');
+    await (await page.getProductInputButton()).click();
+
+    var productList = await page.getProductList()
+    expect(productList.length).toEqual(1);
+    debugger
+
+    expect(await (page.getProductTitle(productList[0]))).toContain('Add a new product');
+
   });
 
   afterEach(async () => {
